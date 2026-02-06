@@ -30,8 +30,20 @@
             cursor: pointer;
         }
         #yesBtn {
-            background-color: #4CAF50;
-            color: white;
+             width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <button id="yesBtn">Yes</button>
+    <button id="noBtn">No</button>
+
+    <script>
+        document.getElementById('noBtn').addEventListener('click', function() {
+            const yesButton = document.getElementById('yesBtn');
+            yesButton.style.width = '200px'; // Expands the width
+            yesButton.style.fontSize = '24px'; // Makes text bigger for emphasis
+        }
         }
         #noBtn {
             background-color: #f44336;
@@ -87,4 +99,5 @@
 </body>
 
 </html>
+
 
