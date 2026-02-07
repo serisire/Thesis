@@ -28,21 +28,11 @@
             border: none;
             border-radius: 5px;
             cursor: pointer;
+            transition: transform 0.5s ease;
         }
         #yesBtn {
-             width: 100px;
-        }
-    </style>
-</head>
-<body>
-    <script>
-    <button id="yesBtn">Yes</button>
-    <button id="noBtn">No</button>
-
-        document.getElementById('noBtn').addEventListener('click', function() {
-            const yesButton = document.getElementById('yesBtn');
-            yesBtn.style.width = '200px'; // Expands the width
-            yesBtn.style.fontSize = '24px'; // Makes text bigger for emphasis
+            background-color: #4CAF50;
+            color: white;
         }
         #noBtn {
             background-color: #f44336;
@@ -55,19 +45,14 @@
             display: none;
         }
         .expanded {
-            font-size: 24px;
-            animation: expand 1s ease-in-out;
-        }
-        @keyframes expand {
-            from { transform: scale(1); }
-            to { transform: scale(1.2); }
+            transform: scale(1.5);
         }
     </style>
 </head>
 <body>
     <div class="letter">
-        <h2>Dear [MWehehhse],</h2>
-        <p>
+        <h2>Dear [Crush's Name],</h2>
+        <p>Roses are red, violets are blue,<br>
         Will you be my Valentine? I hope so!</p>
         <p>Click Yes or No below.</p>
         <button id="yesBtn">Yes</button>
@@ -81,25 +66,21 @@
         const response = document.getElementById('response');
 
         yesBtn.addEventListener('click', () => {
-            response.innerHTML = "Yay!<br>Happy Valentine's! Kinikilig Akoooo.<br>(This message expands to celebrate!)";
-            response.classList.add('expanded');
+            response.innerHTML = "Yay! You said YES! 💖<br>Happy Valentine's Day! Let's make some memories together.";
             response.style.display = 'block';
+            yesBtn.classList.add('expanded');
             yesBtn.disabled = true;
             noBtn.disabled = true;
         });
 
         noBtn.addEventListener('click', () => {
-            response.innerHTML = "Are you sure? Think again! 😢<br>The No button is now disabled. Try clicking Yes instead!";
+            // Clicking No makes the Yes button expand, and shows a message encouraging Yes
+            response.innerHTML = "Are you sure? Think again! 😢<br>The No button can't proceed—now the Yes button expands!";
             response.style.display = 'block';
+            yesBtn.classList.add('expanded');
             noBtn.disabled = true;
-            // To prevent proceeding, buttons stay disabled
+            // Yes button expands to encourage clicking it
         });
     </script>
 </body>
-
 </html>
-
-
-
-
-
