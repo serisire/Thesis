@@ -35,7 +35,6 @@
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
-l
         }
         #yesBtn {
             background-color: #4CAF50;
@@ -58,6 +57,18 @@ l
             font-weight: bold;
             display: none;
         }
+        .gif-container {
+            position: absolute;
+            top: 70%; /* Position above the response, adjust as needed */
+            left: 50%;
+            transform: translateX(-50%);
+            display: none; /* Hidden by default */
+            text-align: center; /* Center content inside */
+        }
+        .gif-container img {
+            width: 100px; /* Adjust GIF size */
+            height: auto;
+        }
     </style>
 </head>
 <body>
@@ -68,6 +79,11 @@ l
         <p>Click Yes or No below.</p>
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
+        <!-- GIF inside the panel, on top of no messages -->
+        <div class="gif-container" id="gifContainer">
+            <img id="gifImage" src="https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjlwZG9pN3Z0c3FkOGVjYWVicWQzd2ltM2hkeHF4eDAwZTZobGR5MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fFa05KbZowXiEIyRse/giphy.gif" alt="GIF"> <!-- Default sad GIF for No -->
+            <br>
+        </div>
         <div id="response"></div>
     </div>
 
@@ -75,6 +91,8 @@ l
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const response = document.getElementById('response');
+        const gifContainer = document.getElementById('gifContainer');
+        const gifImage = document.getElementById('gifImage');
         let scale = 1; // Initial scale for Yes button
         let noClickCount = 0; // Track No button clicks
         const noMessages = [
@@ -91,21 +109,25 @@ l
         yesBtn.addEventListener('click', () => {
             response.innerHTML = "Yay! Bigyan natin sila ng sakit sa ulo";
             response.style.display = 'block';
-            yesBtn.style.transform = `scale(${scale + 1})`; // Final big expansion
+            noBtn.style.display = 'none'; // Hide No button so Yes moves to the center
+            yesBtn.style.marginLeft = '0px'; // Center Yes button perfectly
+            yesBtn.style.transform = `translate(-50%, -50%) scale(${scale + 1})`; // Final big expansion
             yesBtn.disabled = true;
             noBtn.disabled = true;
+            gifImage.src = "https://media3.giphy.com/media/v1.Y2lkPTZjMDliOTUybHloZXJ6bXM3Nmo2dGZmNmRqYXF4aGcwYTFocTdsOWVjNDB6dDhlbCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/T70hpBP1L0N7U0jtkq/giphy.gif"; // Happy GIF for Yes (replace with your own if needed)
+            gifContainer.style.display = 'block'; // Show happy GIF in the same position
         });
 
         noBtn.addEventListener('click', () => {
             scale += 0.3; // Increase scale by 0.3 each click
-            yesBtn.style.transform = `scale(${scale})`; // Expand Yes button incrementally
+            yesBtn.style.transform = `translate(-50%, -50%) scale(${scale})`; // Expand Yes button incrementally
             const messageIndex = noClickCount % noMessages.length; // Cycle through messages
             response.innerHTML = noMessages[messageIndex];
             response.style.display = 'block';
+            gifImage.src = "https://media1.giphy.com/media/v1.Y2lkPTZjMDliOTUyNjlwZG9pN3Z0c3FkOGVjYWVicWQzd2ltM2hkeHF4eDAwZTZobGR5MiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/fFa05KbZowXiEIyRse/giphy.gif"; // Sad GIF for No
+            gifContainer.style.display = 'block'; // Show GIF inside the panel, on top of messages
             noClickCount++; // Increment click count
         });
     </script>
 </body>
 </html>
-
-
