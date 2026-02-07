@@ -44,8 +44,12 @@
             font-weight: bold;
             display: none;
         }
-        .expanded {
-            transform: scale(1.5);
+        .expanding {
+            animation: continuousExpand 2s infinite linear;
+        }
+        @keyframes continuousExpand {
+            0% { transform: scale(1); }
+            100% { transform: scale(2); }
         }
     </style>
 </head>
@@ -66,20 +70,18 @@
         const response = document.getElementById('response');
 
         yesBtn.addEventListener('click', () => {
-            response.innerHTML = "Yay! You said YES! 💖<br>Happy Valentine's Day! Let's make some memories together.";
+            response.innerHTML = "Wowowow kinikilig ako bwuehwhehe";
             response.style.display = 'block';
-            yesBtn.classList.add('expanded');
+            yesBtn.classList.add('expanding');
             yesBtn.disabled = true;
             noBtn.disabled = true;
         });
 
         noBtn.addEventListener('click', () => {
-            // Clicking No makes the Yes button expand, and shows a message encouraging Yes
-            response.innerHTML = "Are you sure? Think again! 😢<br>The No button can't proceed—now the Yes button expands!";
+            response.innerHTML = "Pleaseeeee ";
             response.style.display = 'block';
-            yesBtn.classList.add('expanded');
+            yesBtn.classList.add('expanding');
             noBtn.disabled = true;
-            // Yes button expands to encourage clicking it
         });
     </script>
 </body>
