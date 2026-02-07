@@ -15,11 +15,13 @@
         .letter {
             margin: 20px auto;
             max-width: 400px;
+            min-height: 500px; /* Increased min-height to ensure space for expanding button and text visibility */
             padding: 20px;
             background-color: #fff;
             border: 2px solid #ff69b4;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            position: relative; /* For absolute positioning of response */
         }
         button {
             margin: 10px;
@@ -29,35 +31,40 @@
             border-radius: 5px;
             cursor: pointer;
             transition: transform 0.5s ease;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+l
         }
         #yesBtn {
             background-color: #4CAF50;
             color: white;
+            margin-left: -50px;
+            z-index: 2;
         }
         #noBtn {
             background-color: #f44336;
             color: white;
+            margin-left: 50px;
+            z-index: 1;
         }
         #response {
-            margin-top: 20px;
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
             font-size: 18px;
             font-weight: bold;
             display: none;
-        }
-        .expanding {
-            animation: continuousExpand 2s infinite linear;
-        }
-        @keyframes continuousExpand {
-            0% { transform: scale(1); }
-            100% { transform: scale(2); }
         }
     </style>
 </head>
 <body>
     <div class="letter">
-        <h2>Dear [Crush's Name],</h2>
-        <p>Roses are red, violets are blue,<br>
-        Will you be my Valentine? I hope so!</p>
+        <h2>Hello Nixx,</h2>
+        <p>Free ka naman siguro,<br>
+        Tara mambato sa Valentine? Bwahhaaha</p>
         <p>Click Yes or No below.</p>
         <button id="yesBtn">Yes</button>
         <button id="noBtn">No</button>
@@ -68,20 +75,34 @@
         const yesBtn = document.getElementById('yesBtn');
         const noBtn = document.getElementById('noBtn');
         const response = document.getElementById('response');
+        let scale = 1; // Initial scale for Yes button
+        let noClickCount = 0; // Track No button clicks
+        const noMessages = [
+            "Sure kaba dyan? :(",
+            "Sige na pleaseeee!!",
+            "Ako nato si natoy",
+            "Just say yes",
+            "Aray, Iiyak ako dito",
+            "Yes muna kasiii",
+            "it will be fun",
+            "Hindi pwedeng hindi"
+        ];
 
         yesBtn.addEventListener('click', () => {
-            response.innerHTML = "Wowowow kinikilig ako bwuehwhehe";
+            response.innerHTML = "Yay! Bigyan natin sila ng sakit sa ulo";
             response.style.display = 'block';
-            yesBtn.classList.add('expanding');
+            yesBtn.style.transform = `scale(${scale + 1})`; // Final big expansion
             yesBtn.disabled = true;
             noBtn.disabled = true;
         });
 
         noBtn.addEventListener('click', () => {
-            response.innerHTML = "Pleaseeeee ";
+            scale += 0.3; // Increase scale by 0.3 each click
+            yesBtn.style.transform = `scale(${scale})`; // Expand Yes button incrementally
+            const messageIndex = noClickCount % noMessages.length; // Cycle through messages
+            response.innerHTML = noMessages[messageIndex];
             response.style.display = 'block';
-            yesBtn.classList.add('expanding');
-            noBtn.disabled = true;
+            noClickCount++; // Increment click count
         });
     </script>
 </body>
